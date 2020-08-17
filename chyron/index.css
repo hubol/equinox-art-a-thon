@@ -1,0 +1,19 @@
+* {
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    -webkit-tap-highlight-color: #00000000;
+    margin: 0;
+    padding: 0;
+}
+
+#chyron {
+    background-color: black;
+    color: white;
+    padding: 5em;
+    margin-bottom: 1em;
+}
+
+#total-donations-text {
+    font-size: 6em;
+}
