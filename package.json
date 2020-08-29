@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "live-server",
-    "start": "http-server -p $PORT"
+    "dev": "live-server"
   },
   "repository": {
     "type": "git",
@@ -20,5 +19,6 @@
   "homepage": "https://github.com/hubol/equinox-art-a-thon#readme",
   "devDependencies": {
     "live-server": "^1.2.1"
-  }
+  },
+  "dependencies": {}
 }

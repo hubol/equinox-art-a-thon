@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1aacb9ec-5caf-45bb-8f4c-e09a2d6488a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597695534190</updated>
       <workItem from="1597695535236" duration="2284000" />
-      <workItem from="1598728096654" duration="635000" />
+      <workItem from="1598728096654" duration="1016000" />
     </task>
     <servers />
   </component>
