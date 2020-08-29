@@ -26,26 +26,76 @@ const donateAtText = new Text('Text 1-800-676-8989 to donate!', {
     donateAtText.y = 160 + Math.cos(time.ms / 1000 - 4) * 2;
 });
 
+const donorMessagesText = new Text("", {
+    fontFamily: "cooper-black-std",
+    fontSize: 48,
+    fill: 0xffffff
+}).withStep(() => {
+    donorMessagesText.x--;
+});
+donorMessagesText.x = 1920;
+donorMessagesText.y = 64;
+
 const state = {
     set totalDonationText(value)
     {
         totalDonationText.text = `Total donations:
 ${value}`;
+    },
+    set donorMessages(value)
+    {
+        const donorMessages = getDonorMessagesFromInputValue(value);
+        donorMessagesText.text = "";
+        for (const donorMessage of donorMessages) {
+            donorMessagesText.text += getReadableDonorMessage(donorMessage);
+        }
     }
 };
+
+function getReadableDonorMessage({ donor, message })
+{
+    if (!!message && message.length > 0)
+        return `${donor} says ${message} ~ `;
+    return `${donor} ~ `;
+}
+
+function getDonorMessageFromLine(line)
+{
+    const indexOfColon = line.indexOf(":");
+    if (indexOfColon === -1)
+    {
+        if (line.length === 0)
+            return undefined;
+        return {
+            donor: line.trim(),
+            message: ""
+        };
+    }
+    return {
+        donor: line.substr(0, indexOfColon).trim(),
+        message: line.substr(indexOfColon + 1).trim()
+    }
+}
+
+function getDonorMessagesFromInputValue(value)
+{
+    return value.split(/\r?\n/).map(getDonorMessageFromLine).filter(x => !!x);
+}
 
 const dropShadowContainer = new Container();
 
 const dropShadowFilter = new PIXI.filters.DropShadowFilter({distance: 3, alpha: 0.5, quality: 3, blur: 1});
 dropShadowContainer.filters = [dropShadowFilter];
 
-dropShadowContainer.addChild(totalDonationText, donateAtText);
+dropShadowContainer.addChild(totalDonationText, donateAtText, donorMessagesText);
 app.stage.addChild(dropShadowContainer);
 
 function updateChyron()
 {
     state.totalDonationText
         = document.getElementById("total-donations").value;
+    state.donorMessages
+        = document.getElementById("donor-messages").value;
 }
 
 function stopReturnKeyForTextInput(evt) {
