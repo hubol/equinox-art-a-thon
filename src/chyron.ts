@@ -4,27 +4,38 @@ import {time} from "./utils/time";
 import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
 import {ScrollMask} from "./textures";
+import MultiStyleText from "pixi-multistyle-text";
 
 const width = 1920;
 const height = 256;
 const app = bindAsshat(startApplication({ width, height, resolution: 2, transparent: true }));
 
-const totalDonationText = new Text('Click the Clown', {
-    fontFamily: "cooper-black-std",
-    fontSize: 48,
-    fill: 0xffffff
+const totalDonationText = new MultiStyleText('Click the Clown', {
+    "default": {
+        fontFamily: "cooper-black-std",
+        fontSize: 48,
+        fill: 0xffffff
+    },
+    "money": {
+        fill: 0x49B0A9
+    }
 }).withStep(() => {
     totalDonationText.x = 8 + Math.sin(time.ms / 1000) * 2;
     totalDonationText.y = 8 + Math.cos(time.ms / 1000) * 2;
 });
 
-const donateAtText = new Text('Text 1-800-676-8989 to donate!', {
-    fontFamily: "cooper-black-std",
-    fontSize: 48,
-    fill: 0xffffff
+const donateAtText = new MultiStyleText('Text <number>1-800-676-8989</number> to donate!', {
+    "default": {
+        fontFamily: "cooper-black-std",
+        fontSize: 48,
+        fill: 0xffffff
+    },
+    "number": {
+        fill: 0xEEAE22
+    }
 }).withStep(() => {
-    donateAtText.x = 8 + Math.sin(time.ms / 1000 * 2 + 3) * 2;
-    donateAtText.y = 160 + Math.cos(time.ms / 1000 - 4) * 2;
+    donateAtText.x = width - 8 - donateAtText.width + Math.sin(time.ms / 1000 * 2 + 3) * 2;
+    donateAtText.y = 8 + Math.cos(time.ms / 1000 - 4) * 2;
 });
 
 const donorMessagesContainer = new Container();
@@ -39,7 +50,7 @@ donorMessagesContainer.mask = mask;
 
 const donorMessagesText = new Text("", {
     fontFamily: "cooper-black-std",
-    fontSize: 48,
+    fontSize: 32,
     fill: 0xffffff
 }).withStep(() => {
     donorMessagesText.x--;
@@ -47,7 +58,7 @@ const donorMessagesText = new Text("", {
         donorMessagesText.x = width;
 });
 donorMessagesText.x = width;
-donorMessagesText.y = 64;
+donorMessagesText.y = 160;
 
 donorMessagesContainer.addChild(donorMessagesText);
 
@@ -55,7 +66,7 @@ const state = {
     set totalDonationText(value)
     {
         totalDonationText.text = `Total donations:
-${value}`;
+<money>${value}</money>`;
     },
     set donorMessages(value)
     {

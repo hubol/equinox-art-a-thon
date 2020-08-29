@@ -27,6 +27,7 @@
   "dependencies": {
     "pissant": "^0.1.2",
     "pixi-filters": "^3.1.1",
+    "pixi-multistyle-text": "^0.10.0",
     "pixi.js": "^5.3.3"
   }
 }
