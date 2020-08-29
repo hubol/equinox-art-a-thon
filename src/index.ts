@@ -1,5 +1,5 @@
 import {startApplication} from "./utils/pixiUtils";
-import {Container, Text} from "pixi.js";
+import {Container, Sprite, Text} from "pixi.js";
 import {time} from "./utils/time";
 import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
@@ -7,7 +7,9 @@ import {bindAsshat} from "./utils/asshat";
 require("./utils/arrayExtensions");
 require("./utils/pixiExtensions");
 
-const app = bindAsshat(startApplication({ width: 1920, height: 256, resolution: 2, transparent: true }));
+const width = 1920;
+const height = 256;
+const app = bindAsshat(startApplication({ width, height, resolution: 2, transparent: true }));
 
 const totalDonationText = new Text('Click the Clown', {
     fontFamily: "cooper-black-std",
@@ -27,15 +29,27 @@ const donateAtText = new Text('Text 1-800-676-8989 to donate!', {
     donateAtText.y = 160 + Math.cos(time.ms / 1000 - 4) * 2;
 });
 
+const donorMessagesContainer = new Container();
+donorMessagesContainer.width = width;
+donorMessagesContainer.height = height;
+// const mask = Sprite.from(require("./scroll mask.png"));
+// mask.width = width;
+// mask.height = height;
+// donorMessagesContainer.mask = mask;
+
 const donorMessagesText = new Text("", {
     fontFamily: "cooper-black-std",
     fontSize: 48,
     fill: 0xffffff
 }).withStep(() => {
     donorMessagesText.x--;
+    if (donorMessagesText.x <= -donorMessagesText.width)
+        donorMessagesText.x = width;
 });
-donorMessagesText.x = 1920;
+donorMessagesText.x = width;
 donorMessagesText.y = 64;
+
+donorMessagesContainer.addChild(donorMessagesText);
 
 const state = {
     set totalDonationText(value)
@@ -88,7 +102,7 @@ const dropShadowContainer = new Container();
 const dropShadowFilter = new DropShadowFilter({distance: 3, alpha: 0.5, quality: 3, blur: 1});
 dropShadowContainer.filters = [dropShadowFilter];
 
-dropShadowContainer.addChild(totalDonationText, donateAtText, donorMessagesText);
+dropShadowContainer.addChild(totalDonationText, donateAtText, donorMessagesContainer);
 app.stage.addChild(dropShadowContainer);
 
 function updateChyron()
