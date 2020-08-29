@@ -19,9 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aacb9ec-5caf-45bb-8f4c-e09a2d6488a6" name="Default Changelist" comment="Add index">
+    <list default="true" id="1aacb9ec-5caf-45bb-8f4c-e09a2d6488a6" name="Default Changelist" comment="Add awesome adobe font">
+      <change afterPath="$PROJECT_DIR$/utils/hubol-pixi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chyron/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/chyron/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chyron/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/chyron/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chyron/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/chyron/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +35,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -93,7 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1597695534190</updated>
       <workItem from="1597695535236" duration="2284000" />
-      <workItem from="1598728096654" duration="1446000" />
+      <workItem from="1598728096654" duration="5025000" />
     </task>
     <task id="LOCAL-00001" summary="Add index">
       <created>1598729190031</created>
@@ -102,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1598729190031</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add awesome adobe font">
+      <created>1598729551727</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598729551727</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,32 +132,33 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add index" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add index" />
+    <MESSAGE value="Add awesome adobe font" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add awesome adobe font" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="2843" height="449" key="GridCell.Tab.0.bottom" timestamp="1598728389585">
+    <state width="2843" height="449" key="GridCell.Tab.0.bottom" timestamp="1598730795597">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
-    <state width="2843" height="449" key="GridCell.Tab.0.bottom/0.0.2880.1722@0.0.2880.1722" timestamp="1598728389585" />
-    <state width="2843" height="449" key="GridCell.Tab.0.center" timestamp="1598728389585">
+    <state width="2843" height="449" key="GridCell.Tab.0.bottom/0.0.2880.1722@0.0.2880.1722" timestamp="1598730795597" />
+    <state width="2843" height="449" key="GridCell.Tab.0.center" timestamp="1598730795597">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
-    <state width="2843" height="449" key="GridCell.Tab.0.center/0.0.2880.1722@0.0.2880.1722" timestamp="1598728389585" />
-    <state width="2843" height="449" key="GridCell.Tab.0.left" timestamp="1598728389585">
+    <state width="2843" height="449" key="GridCell.Tab.0.center/0.0.2880.1722@0.0.2880.1722" timestamp="1598730795597" />
+    <state width="2843" height="449" key="GridCell.Tab.0.left" timestamp="1598730795597">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
-    <state width="2843" height="449" key="GridCell.Tab.0.left/0.0.2880.1722@0.0.2880.1722" timestamp="1598728389585" />
-    <state width="2843" height="449" key="GridCell.Tab.0.right" timestamp="1598728389585">
+    <state width="2843" height="449" key="GridCell.Tab.0.left/0.0.2880.1722@0.0.2880.1722" timestamp="1598730795597" />
+    <state width="2843" height="449" key="GridCell.Tab.0.right" timestamp="1598730795597">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
-    <state width="2843" height="449" key="GridCell.Tab.0.right/0.0.2880.1722@0.0.2880.1722" timestamp="1598728389585" />
+    <state width="2843" height="449" key="GridCell.Tab.0.right/0.0.2880.1722@0.0.2880.1722" timestamp="1598730795597" />
     <state x="714" y="411" key="IDE.errors.dialog" timestamp="1598729537228">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
     <state x="714" y="411" key="IDE.errors.dialog/0.0.2880.1722@0.0.2880.1722" timestamp="1598729537228" />
-    <state x="735" y="393" key="Vcs.Push.Dialog.v2" timestamp="1598729190758">
+    <state x="735" y="393" key="Vcs.Push.Dialog.v2" timestamp="1598729552878">
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
-    <state x="735" y="393" key="Vcs.Push.Dialog.v2/0.0.2880.1722@0.0.2880.1722" timestamp="1598729190758" />
+    <state x="735" y="393" key="Vcs.Push.Dialog.v2/0.0.2880.1722@0.0.2880.1722" timestamp="1598729552878" />
   </component>
 </project>
