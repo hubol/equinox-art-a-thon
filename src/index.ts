@@ -1,12 +1,13 @@
-const { Sprite, Texture, Graphics, Text, Container } = PIXI;
+import {startApplication} from "./utils/pixiUtils";
+import {Container, Text} from "pixi.js";
+import {time} from "./utils/time";
+import { DropShadowFilter } from "@pixi/filter-drop-shadow";
+import {bindAsshat} from "./utils/asshat";
 
-const app = startApplication({ width: 1920, height: 256, resolution: 2, transparent: true });
+require("./utils/arrayExtensions");
+require("./utils/pixiExtensions");
 
-const time = {
-    get ms() {
-        return getCurrentTimeMilliseconds();
-    }
-}
+const app = bindAsshat(startApplication({ width: 1920, height: 256, resolution: 2, transparent: true }));
 
 const totalDonationText = new Text('Click the Clown', {
     fontFamily: "cooper-black-std",
@@ -84,7 +85,7 @@ function getDonorMessagesFromInputValue(value)
 
 const dropShadowContainer = new Container();
 
-const dropShadowFilter = new PIXI.filters.DropShadowFilter({distance: 3, alpha: 0.5, quality: 3, blur: 1});
+const dropShadowFilter = new DropShadowFilter({distance: 3, alpha: 0.5, quality: 3, blur: 1});
 dropShadowContainer.filters = [dropShadowFilter];
 
 dropShadowContainer.addChild(totalDonationText, donateAtText, donorMessagesText);
@@ -93,9 +94,9 @@ app.stage.addChild(dropShadowContainer);
 function updateChyron()
 {
     state.totalDonationText
-        = document.getElementById("total-donations").value;
+        = (document.getElementById("total-donations") as any).value;
     state.donorMessages
-        = document.getElementById("donor-messages").value;
+        = (document.getElementById("donor-messages") as any).value;
 }
 
 function stopReturnKeyForTextInput(evt) {
