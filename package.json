@@ -2,9 +2,9 @@
   "name": "equinox-art-a-thon",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "live-server"
+    "start": "parcel src/index.html --open",
+    "build": "parcel build --public-url ./ src/index.html --out-dir ./gh-pages"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/hubol/equinox-art-a-thon#readme",
   "devDependencies": {
-    "live-server": "^1.2.1"
+    "parcel-bundler": "^1.12.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "pixi-filters": "^3.1.1",
+    "pixi.js": "^5.3.3"
+  }
 }
