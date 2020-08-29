@@ -1,7 +1,6 @@
 const { Sprite, Texture, Graphics, Text, Container } = PIXI;
 
-const app = startApplication({ width: 1920, height: 256, resolution: 2 });
-app.renderer.backgroundColor = 0x008844;
+const app = startApplication({ width: 1920, height: 256, resolution: 2, transparent: true });
 
 const time = {
     get ms() {

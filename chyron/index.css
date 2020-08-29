@@ -9,8 +9,13 @@
 
 #gameCanvas {
     position: relative;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
     width: 90vw;
     left: 5vw;
+}
+
+#canvasSection
+{
+    background-image: url("hubble.jpg");
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
