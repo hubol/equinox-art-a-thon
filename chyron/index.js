@@ -4,14 +4,14 @@ function updateChyron()
         = document.getElementById("total-donations").value;
 }
 
-function stopRKey(evt) {
+function stopReturnKeyForTextInput(evt) {
     evt = (evt) ? evt : ((event) ? event : null);
     const node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
     if (evt.keyCode === 13 && node.type === "text")
         return false;
 }
 
-document.onkeypress = stopRKey;
+document.onkeypress = stopReturnKeyForTextInput;
 
 async function updateOnInterval()
 {

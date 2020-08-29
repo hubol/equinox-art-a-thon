@@ -1,0 +1,24 @@
+{
+  "name": "equinox-art-a-thon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubol/equinox-art-a-thon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hubol/equinox-art-a-thon/issues"
+  },
+  "homepage": "https://github.com/hubol/equinox-art-a-thon#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
