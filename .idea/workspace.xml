@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1aacb9ec-5caf-45bb-8f4c-e09a2d6488a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    <list default="true" id="1aacb9ec-5caf-45bb-8f4c-e09a2d6488a6" name="Default Changelist" comment="Add index">
+      <change beforePath="$PROJECT_DIR$/chyron/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/chyron/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chyron/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/chyron/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,9 +31,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -93,8 +93,16 @@
       <option name="presentableId" value="Default" />
       <updated>1597695534190</updated>
       <workItem from="1597695535236" duration="2284000" />
-      <workItem from="1598728096654" duration="1016000" />
+      <workItem from="1598728096654" duration="1446000" />
     </task>
+    <task id="LOCAL-00001" summary="Add index">
+      <created>1598729190031</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598729190031</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +119,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add index" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add index" />
   </component>
   <component name="WindowStateProjectService">
     <state width="2843" height="449" key="GridCell.Tab.0.bottom" timestamp="1598728389585">
@@ -129,5 +141,13 @@
       <screen x="0" y="0" width="2880" height="1722" />
     </state>
     <state width="2843" height="449" key="GridCell.Tab.0.right/0.0.2880.1722@0.0.2880.1722" timestamp="1598728389585" />
+    <state x="714" y="411" key="IDE.errors.dialog" timestamp="1598729537228">
+      <screen x="0" y="0" width="2880" height="1722" />
+    </state>
+    <state x="714" y="411" key="IDE.errors.dialog/0.0.2880.1722@0.0.2880.1722" timestamp="1598729537228" />
+    <state x="735" y="393" key="Vcs.Push.Dialog.v2" timestamp="1598729190758">
+      <screen x="0" y="0" width="2880" height="1722" />
+    </state>
+    <state x="735" y="393" key="Vcs.Push.Dialog.v2/0.0.2880.1722@0.0.2880.1722" timestamp="1598729190758" />
   </component>
 </project>
