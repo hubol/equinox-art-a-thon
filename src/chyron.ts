@@ -55,12 +55,13 @@ dropShadowContainer.filters = [dropShadowFilter];
 dropShadowContainer.addChild(totalDonationText, donateAtText, donorMessagesContainer);
 app.stage.addChild(dropShadowContainer);
 
+const totalDonationsInputElement = document.getElementById("total-donations") as HTMLInputElement;
+const donorMessagesTextAreaElement = document.getElementById("donor-messages") as HTMLTextAreaElement;
+
 function updateChyron()
 {
-    state.totalDonationText
-        = (document.getElementById("total-donations") as any).value;
-    state.donorMessages
-        = (document.getElementById("donor-messages") as any).value;
+    state.totalDonationText = totalDonationsInputElement.value;
+    state.donorMessages = donorMessagesTextAreaElement.value;
 }
 
 async function updateOnInterval()
@@ -74,3 +75,7 @@ async function updateOnInterval()
 
 setTimeout(updateOnInterval);
 disableReturnKeyBehaviorForTextInput();
+
+totalDonationsInputElement.value = "$1,000.00";
+donorMessagesTextAreaElement.value = `Hubol P.: I love Public Space One!
+Hubol Jr.: I also love Public Space One!`;
