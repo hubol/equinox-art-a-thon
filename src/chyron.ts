@@ -8,6 +8,7 @@ import {leftScrollingTickerText} from "./components/leftScrollingTickerText";
 import {wiggleText} from "./components/wiggleText";
 import {cooperBlackTextStyleSet} from "./utils/cooperBlackTextStyleSet";
 import {disableReturnKeyBehaviorForTextInput} from "./utils/disableReturnKeyBehaviorForTextInput";
+import {sleep} from "pissant";
 
 const width = 1920;
 const height = 256;
@@ -113,11 +114,6 @@ async function updateOnInterval()
         updateChyron();
         await sleep(100);
     }
-}
-
-function sleep(ms)
-{
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 setTimeout(updateOnInterval);
