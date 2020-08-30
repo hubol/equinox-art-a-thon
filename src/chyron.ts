@@ -7,6 +7,7 @@ import {ScrollMask} from "./textures";
 import {leftScrollingTickerText} from "./components/leftScrollingTickerText";
 import {wiggleText} from "./components/wiggleText";
 import {cooperBlackTextStyleSet} from "./utils/cooperBlackTextStyleSet";
+import {disableReturnKeyBehaviorForTextInput} from "./utils/disableReturnKeyBehaviorForTextInput";
 
 const width = 1920;
 const height = 256;
@@ -105,15 +106,6 @@ function updateChyron()
         = (document.getElementById("donor-messages") as any).value;
 }
 
-function stopReturnKeyForTextInput(evt) {
-    evt = (evt) ? evt : ((event) ? event : null);
-    const node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
-    if (evt.keyCode === 13 && node.type === "text")
-        return false;
-}
-
-document.onkeypress = stopReturnKeyForTextInput;
-
 async function updateOnInterval()
 {
     while (true)
@@ -129,3 +121,4 @@ function sleep(ms)
 }
 
 setTimeout(updateOnInterval);
+disableReturnKeyBehaviorForTextInput();
