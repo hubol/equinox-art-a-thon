@@ -1,14 +1,8 @@
-import {Text} from "pixi.js";
 import {asshat} from "../utils/asshat";
 import MultiStyleText, {TextStyleSet} from "pixi-multistyle-text";
+import {cooperBlackTextStyleSet} from "../utils/cooperBlackTextStyleSet";
 
-const defaultTextStyleSet = {
-    "default": {
-        fontFamily: "cooper-black-std",
-        fontSize: 32,
-        fill: 0xffffff
-    }
-}
+const defaultTextStyleSet = cooperBlackTextStyleSet({});
 
 export function leftScrollingTickerText(speed: number, textStyleSet: TextStyleSet = defaultTextStyleSet)
 {
