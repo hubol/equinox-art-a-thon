@@ -11,6 +11,6 @@ export function leftScrollingTickerText(speed: number, textStyleSet: TextStyleSe
         if (text.x <= -text.width)
             text.x = asshat.width;
     });
-    text.x = asshat.width;
+    text.x = 5;
     return text;
 }

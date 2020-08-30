@@ -31,15 +31,14 @@ donateAtText.text = 'Text <number>1-800-676-8989</number> to donate!';
 const donorMessagesContainer = maskedScreenContainer(Sprite.from(ScrollMask));
 
 const donorMessagesText = aeatTickerText();
-donorMessagesText.y = 160;
+donorMessagesText.y = 80;
 
 donorMessagesContainer.addChild(donorMessagesText);
 
 const state = {
     set totalDonationText(value)
     {
-        totalDonationText.text = `Total donations:
-<money>${value}</money>`;
+        totalDonationText.text = `Total donations: <money>${value}</money>`;
     },
     set donorMessages(value)
     {
