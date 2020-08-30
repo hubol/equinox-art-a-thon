@@ -3,12 +3,12 @@ import {Container, Sprite} from "pixi.js";
 import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
 import {ScrollMask} from "./textures";
-import {leftScrollingTickerText} from "./components/leftScrollingTickerText";
 import {wiggleText} from "./components/wiggleText";
 import {cooperBlackTextStyleSet} from "./utils/cooperBlackTextStyleSet";
 import {disableReturnKeyBehaviorForTextInput} from "./utils/disableReturnKeyBehaviorForTextInput";
 import {sleep} from "pissant";
 import {maskedScreenContainer} from "./utils/maskedScreenContainer";
+import {aeatTickerText} from "./components/aeatTickerText";
 
 const width = 1920;
 const height = 256;
@@ -30,7 +30,7 @@ donateAtText.text = 'Text <number>1-800-676-8989</number> to donate!';
 
 const donorMessagesContainer = maskedScreenContainer(Sprite.from(ScrollMask));
 
-const donorMessagesText = leftScrollingTickerText(1);
+const donorMessagesText = aeatTickerText();
 donorMessagesText.y = 160;
 
 donorMessagesContainer.addChild(donorMessagesText);
@@ -43,43 +43,9 @@ const state = {
     },
     set donorMessages(value)
     {
-        const donorMessages = getDonorMessagesFromInputValue(value);
-        donorMessagesText.text = "";
-        for (const donorMessage of donorMessages) {
-            donorMessagesText.text += getReadableDonorMessage(donorMessage);
-        }
+        donorMessagesText.setText(value);
     }
 };
-
-function getReadableDonorMessage({ donor, message })
-{
-    if (!!message && message.length > 0)
-        return `${donor} says ${message} ~ `;
-    return `${donor} ~ `;
-}
-
-function getDonorMessageFromLine(line)
-{
-    const indexOfColon = line.indexOf(":");
-    if (indexOfColon === -1)
-    {
-        if (line.length === 0)
-            return undefined;
-        return {
-            donor: line.trim(),
-            message: ""
-        };
-    }
-    return {
-        donor: line.substr(0, indexOfColon).trim(),
-        message: line.substr(indexOfColon + 1).trim()
-    }
-}
-
-function getDonorMessagesFromInputValue(value)
-{
-    return value.split(/\r?\n/).map(getDonorMessageFromLine).filter(x => !!x);
-}
 
 const dropShadowContainer = new Container();
 
