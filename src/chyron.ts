@@ -5,6 +5,7 @@ import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
 import {ScrollMask} from "./textures";
 import MultiStyleText from "pixi-multistyle-text";
+import {leftScrollingTickerText} from "./components/leftScrollingTickerText";
 
 const width = 1920;
 const height = 256;
@@ -48,16 +49,7 @@ app.stage.addChild(mask);
 
 donorMessagesContainer.mask = mask;
 
-const donorMessagesText = new Text("", {
-    fontFamily: "cooper-black-std",
-    fontSize: 32,
-    fill: 0xffffff
-}).withStep(() => {
-    donorMessagesText.x--;
-    if (donorMessagesText.x <= -donorMessagesText.width)
-        donorMessagesText.x = width;
-});
-donorMessagesText.x = width;
+const donorMessagesText = leftScrollingTickerText(1);
 donorMessagesText.y = 160;
 
 donorMessagesContainer.addChild(donorMessagesText);
