@@ -4,40 +4,29 @@ import {time} from "./utils/time";
 import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
 import {ScrollMask} from "./textures";
-import MultiStyleText from "pixi-multistyle-text";
 import {leftScrollingTickerText} from "./components/leftScrollingTickerText";
+import {wiggleText} from "./components/wiggleText";
+import {cooperBlackTextStyleSet} from "./utils/cooperBlackTextStyleSet";
 
 const width = 1920;
 const height = 256;
 const app = bindAsshat(startApplication({ width, height, resolution: 2, transparent: true }));
 
-const totalDonationText = new MultiStyleText('Click the Clown', {
-    "default": {
-        fontFamily: "cooper-black-std",
-        fontSize: 48,
-        fill: 0xffffff
-    },
-    "money": {
-        fill: 0x49B0A9
-    }
-}).withStep(() => {
-    totalDonationText.x = 8 + Math.sin(time.ms / 1000) * 2;
-    totalDonationText.y = 8 + Math.cos(time.ms / 1000) * 2;
-});
+const totalDonationText = wiggleText(8, 8, { frequency: 0.3, amplitude: 2, seed: 690 },
+    cooperBlackTextStyleSet({
+        "money": { fill: 0x49B0A9 }
+        },
+        48))
 
-const donateAtText = new MultiStyleText('Text <number>1-800-676-8989</number> to donate!', {
-    "default": {
-        fontFamily: "cooper-black-std",
-        fontSize: 48,
-        fill: 0xffffff
-    },
-    "number": {
-        fill: 0xEEAE22
-    }
-}).withStep(() => {
-    donateAtText.x = width - 8 - donateAtText.width + Math.sin(time.ms / 1000 * 2 + 3) * 2;
-    donateAtText.y = 8 + Math.cos(time.ms / 1000 - 4) * 2;
-});
+const donateAtText = wiggleText(width - 8, 8, { frequency: 0.3, amplitude: 2, seed: 4200 },
+    cooperBlackTextStyleSet({
+            "number": {
+                fill: 0xEEAE22
+            }
+        },
+        48,
+        "right"));
+donateAtText.text = 'Text <number>1-800-676-8989</number> to donate!';
 
 const donorMessagesContainer = new Container();
 donorMessagesContainer.width = width;
