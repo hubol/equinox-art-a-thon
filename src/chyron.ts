@@ -1,6 +1,5 @@
 import {startApplication} from "./utils/pixiUtils";
-import {Container, Graphics, Sprite, Text} from "pixi.js";
-import {time} from "./utils/time";
+import {Container, Sprite} from "pixi.js";
 import { DropShadowFilter } from "@pixi/filter-drop-shadow";
 import {bindAsshat} from "./utils/asshat";
 import {ScrollMask} from "./textures";
@@ -9,6 +8,7 @@ import {wiggleText} from "./components/wiggleText";
 import {cooperBlackTextStyleSet} from "./utils/cooperBlackTextStyleSet";
 import {disableReturnKeyBehaviorForTextInput} from "./utils/disableReturnKeyBehaviorForTextInput";
 import {sleep} from "pissant";
+import {maskedScreenContainer} from "./utils/maskedScreenContainer";
 
 const width = 1920;
 const height = 256;
@@ -16,29 +16,19 @@ const app = bindAsshat(startApplication({ width, height, resolution: 2, transpar
 
 const totalDonationText = wiggleText(8, 8, { frequency: 0.3, amplitude: 2, seed: 690 },
     cooperBlackTextStyleSet({
-        "money": { fill: 0x49B0A9 }
+            "money": { fill: 0x49B0A9 }
         },
         48))
 
 const donateAtText = wiggleText(width - 8, 8, { frequency: 0.3, amplitude: 2, seed: 4200 },
     cooperBlackTextStyleSet({
-            "number": {
-                fill: 0xEEAE22
-            }
+            "number": { fill: 0xEEAE22 }
         },
         48,
         "right"));
 donateAtText.text = 'Text <number>1-800-676-8989</number> to donate!';
 
-const donorMessagesContainer = new Container();
-donorMessagesContainer.width = width;
-donorMessagesContainer.height = height;
-const mask = Sprite.from(ScrollMask);
-mask.width = width;
-mask.height = height;
-app.stage.addChild(mask);
-
-donorMessagesContainer.mask = mask;
+const donorMessagesContainer = maskedScreenContainer(Sprite.from(ScrollMask));
 
 const donorMessagesText = leftScrollingTickerText(1);
 donorMessagesText.y = 160;
