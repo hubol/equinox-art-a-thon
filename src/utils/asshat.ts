@@ -16,6 +16,12 @@ function createAsshat(application: Application)
     return {
         applicationTicker: application.ticker,
         ticker: iguaTicker,
-        stage: application.stage
+        stage: application.stage,
+        get width() {
+            return application.renderer.screen.width;
+        },
+        get height() {
+            return application.renderer.screen.height;
+        }
     }
 }
