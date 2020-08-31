@@ -22,11 +22,12 @@ const totalDonationText = wiggleText(8, 8, { frequency: 0.3, amplitude: 2, seed:
 
 const donateAtText = wiggleText(width - 8, 8, { frequency: 0.3, amplitude: 2, seed: 4200 },
     cooperBlackTextStyleSet({
-            "number": { fill: 0xEEAE22 }
+            "number": { fill: 0xE06E2A },
+            "message": { fill: 0xEEAE22 }
         },
         48,
         "right"));
-donateAtText.text = 'Text <number>1-800-676-8989</number> to donate!';
+donateAtText.text = 'Text <message>PS1</message> to <number>44321</number>';
 
 const donorMessagesContainer = maskedScreenContainer(Sprite.from(ScrollMask));
 
