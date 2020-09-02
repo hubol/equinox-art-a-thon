@@ -9,6 +9,7 @@ import {disableReturnKeyBehaviorForTextInput} from "./utils/disableReturnKeyBeha
 import {sleep} from "pissant";
 import {maskedScreenContainer} from "./utils/maskedScreenContainer";
 import {aeatTickerText} from "./components/aeatTickerText";
+import {getTickerMessagesFromDonorsInputValue} from "./getTickerMessagesFromDonorsInputValue";
 
 const width = 1920;
 const height = 256;
@@ -37,13 +38,13 @@ donorMessagesText.y = 80;
 donorMessagesContainer.addChild(donorMessagesText);
 
 const state = {
-    set totalDonationText(value)
+    set totalDonationText(value: string)
     {
         totalDonationText.text = `Total donations: <money>${value}</money>`;
     },
-    set donorMessages(value)
+    set donorMessages(value: string)
     {
-        donorMessagesText.setText(value);
+        donorMessagesText.messages = getTickerMessagesFromDonorsInputValue(value);
     }
 };
 

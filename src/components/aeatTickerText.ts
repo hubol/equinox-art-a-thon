@@ -3,6 +3,8 @@ import {cooperBlackTextStyleSet} from "../utils/cooperBlackTextStyleSet";
 import MultiStyleText from "pixi-multistyle-text";
 import {Container} from "pixi.js";
 import {asshat} from "../utils/asshat";
+import {TickerMessage} from "./tickerMessage";
+import {default as equals} from "fast-deep-equal";
 
 function makeMultiStyleText(text: string)
 {
@@ -12,7 +14,7 @@ function makeMultiStyleText(text: string)
 export function aeatTickerText()
 {
     let speed = 1;
-    let lastValue: string | undefined = undefined;
+    let lastValue: TickerMessage[] | undefined = undefined;
 
     let multiStyleTexts: MultiStyleText[] = [];
     const container = new Container().withStep(() => {
@@ -26,20 +28,22 @@ export function aeatTickerText()
     });
 
     return merge(container, {
-        setText(value: string)
+        set messages(value: TickerMessage[])
         {
-            if (value === lastValue)
+            if (equals(value, lastValue))
                 return;
 
             multiStyleTexts = [];
             container.removeAllChildren();
 
-            const donorMessages = getDonorMessagesFromInputValue(value);
-            let accentIndex = 0;
+            accentIndex = 0;
             let x = 0;
-            for (const donorMessage of donorMessages) {
-                const accentElementName = `accent${accentIndex % 7}`;
-                const multiStyleText = makeMultiStyleText(toPrintableDonorMessage(donorMessage, accentElementName));
+            for (const tickerMessage of value)
+            {
+                const text = toPrintable(tickerMessage);
+                if (text === undefined)
+                    continue;
+                const multiStyleText = makeMultiStyleText(`${text} ~ `);
                 multiStyleText.x = x;
                 container.addChild(multiStyleText);
                 multiStyleTexts.push(multiStyleText);
@@ -52,34 +56,23 @@ export function aeatTickerText()
     });
 }
 
-function toPrintableDonorMessage({ donor, message }, accent: string)
-{
-    if (!!message && message.length > 0)
-        return `<${accent}>${donor}</${accent}> says ${message} ~ `;
-    return `<${accent}>${donor}</${accent}> ~ `;
-}
+let accentIndex = 0;
 
-function getDonorMessageFromLine(line)
+function toPrintable(tickerMessage: TickerMessage)
 {
-    const indexOfColon = line.indexOf(":");
-    if (indexOfColon === -1)
+    let result = "";
+    for (const x of tickerMessage)
     {
-        if (line.length === 0)
-            return undefined;
-        return {
-            donor: line.trim(),
-            message: ""
-        };
+        if (typeof x === "string")
+        {
+            result += x;
+            continue;
+        }
+        const accent = `accent${(accentIndex++ % 7)}`;
+        result += `<${accent}>${x.text}</${accent}>`;
     }
-    return {
-        donor: line.substr(0, indexOfColon).trim(),
-        message: line.substr(indexOfColon + 1).trim()
-    }
-}
 
-function getDonorMessagesFromInputValue(value)
-{
-    return value.split(/\r?\n/).map(getDonorMessageFromLine).filter(x => !!x);
+    return result.length === 0 ? undefined : result;
 }
 
 const textStyleSet = cooperBlackTextStyleSet({
