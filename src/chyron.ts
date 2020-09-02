@@ -10,6 +10,7 @@ import {sleep} from "pissant";
 import {maskedScreenContainer} from "./utils/maskedScreenContainer";
 import {aeatTickerText} from "./components/aeatTickerText";
 import {getTickerMessagesFromDonorsInputValue} from "./getTickerMessagesFromDonorsInputValue";
+import equal from "fast-deep-equal";
 
 const width = 1920;
 const height = 256;
@@ -32,21 +33,28 @@ donateAtText.text = 'Text <message>PS1</message> to <number>44321</number>';
 
 const donorMessagesContainer = maskedScreenContainer(Sprite.from(ScrollMask));
 
-const donorMessagesText = aeatTickerText();
-donorMessagesText.y = 80;
+const ticker = aeatTickerText();
+ticker.y = 80;
 
-donorMessagesContainer.addChild(donorMessagesText);
+donorMessagesContainer.addChild(ticker);
+
+let previousTickerMessageSource: TickerMessageSource | undefined = undefined;
 
 const state = {
     set totalDonationText(value: string)
     {
         totalDonationText.text = `Total donations: <money>${value}</money>`;
     },
-    set donorMessages(value: string)
+    set tickerMessages(tickerMessageSource: TickerMessageSource)
     {
-        donorMessagesText.messages = getTickerMessagesFromDonorsInputValue(value);
+        if (equal(tickerMessageSource, previousTickerMessageSource))
+            return;
+        ticker.messages = getTickerMessagesFromDonorsInputValue(tickerMessageSource.donorMessagesTextAreaValue);
+        previousTickerMessageSource = tickerMessageSource;
     }
 };
+
+type TickerMessageSource = ReturnType<typeof getTickerMessagesSource>;
 
 const dropShadowContainer = new Container();
 
@@ -58,11 +66,22 @@ app.stage.addChild(dropShadowContainer);
 
 const totalDonationsInputElement = document.getElementById("total-donations") as HTMLInputElement;
 const donorMessagesTextAreaElement = document.getElementById("donor-messages") as HTMLTextAreaElement;
+const currentArtistInputElement = document.getElementById("current-artist") as HTMLInputElement;
+const currentTitleInputElement = document.getElementById("current-title") as HTMLInputElement;
 
 function updateChyron()
 {
     state.totalDonationText = totalDonationsInputElement.value;
-    state.donorMessages = donorMessagesTextAreaElement.value;
+    state.tickerMessages = getTickerMessagesSource();
+}
+
+function getTickerMessagesSource()
+{
+    return {
+        donorMessagesTextAreaValue: donorMessagesTextAreaElement.value,
+        currentArtistInputValue: currentArtistInputElement.value,
+        currentTitleInputValue: currentTitleInputElement.value
+    };
 }
 
 async function updateOnInterval()
