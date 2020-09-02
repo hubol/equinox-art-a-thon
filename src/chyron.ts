@@ -11,6 +11,8 @@ import {maskedScreenContainer} from "./utils/maskedScreenContainer";
 import {aeatTickerText} from "./components/aeatTickerText";
 import {getTickerMessagesFromDonorsInputValue} from "./getTickerMessagesFromDonorsInputValue";
 import equal from "fast-deep-equal";
+import {getTickerMessageFromArtistTitle} from "./getTickerMessageFromArtistTitle";
+import {insertAtLeastOneOrEveryN} from "./utils/insertAtLeastOneOrEveryN";
 
 const width = 1920;
 const height = 256;
@@ -49,7 +51,13 @@ const state = {
     {
         if (equal(tickerMessageSource, previousTickerMessageSource))
             return;
-        ticker.messages = getTickerMessagesFromDonorsInputValue(tickerMessageSource.donorMessagesTextAreaValue);
+
+        const tickerMessagesFromDonorsInputValue = getTickerMessagesFromDonorsInputValue(tickerMessageSource.donorMessagesTextAreaValue);
+        const tickerMessageFromArtistTitle =
+            getTickerMessageFromArtistTitle(tickerMessageSource.currentArtistInputValue, tickerMessageSource.currentTitleInputValue);
+        if (tickerMessageFromArtistTitle)
+            insertAtLeastOneOrEveryN(tickerMessagesFromDonorsInputValue, tickerMessageFromArtistTitle, 3);
+        ticker.messages = tickerMessagesFromDonorsInputValue;
         previousTickerMessageSource = tickerMessageSource;
     }
 };
@@ -102,3 +110,5 @@ Hubol Jr.: I also love Public Space One!
 John E.:Many people say I love Public Space One
 Kalmia S.:I love that Public Space One
 asdf:Aaaaaaaaaaaaaaaah!!!`;
+currentArtistInputElement.value = "Good Evening Gumm";
+currentTitleInputElement.value = "Shrink that A";

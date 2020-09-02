@@ -1,4 +1,4 @@
-import {accent} from "./components/tickerMessage";
+import {accent, TickerMessage} from "./components/tickerMessage";
 
 function getTickerMessageFromDonorsLine(line)
 {
@@ -14,5 +14,5 @@ function getTickerMessageFromDonorsLine(line)
 
 export function getTickerMessagesFromDonorsInputValue(value)
 {
-    return value.split(/\r?\n/).map(getTickerMessageFromDonorsLine).filter(x => !!x);
+    return value.split(/\r?\n/).map(getTickerMessageFromDonorsLine).filter(x => !!x) as TickerMessage[];
 }
