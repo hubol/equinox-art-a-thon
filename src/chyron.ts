@@ -13,6 +13,8 @@ import {getTickerMessagesFromDonorsInputValue} from "./getTickerMessagesFromDono
 import equal from "fast-deep-equal";
 import {getTickerMessageFromArtistTitle} from "./getTickerMessageFromArtistTitle";
 import {insertAtLeastOneOrEveryN} from "./utils/insertAtLeastOneOrEveryN";
+import {pullAsync, pushAsync} from "./parrot";
+import {hasQueryParamSwitch} from "./utils/hasQueryParamSwitch";
 
 const width = 1920;
 const height = 256;
@@ -101,8 +103,61 @@ async function updateOnInterval()
     }
 }
 
+async function pushOnInterval()
+{
+    let lastInputModel: InputModel | undefined = undefined;
+
+    while (true)
+    {
+        const inputModel = getInputModel();
+        if (!equal(lastInputModel, inputModel))
+        {
+            await pushAsync(inputModel);
+            lastInputModel = inputModel;
+        }
+        await sleep(2000);
+    }
+}
+
+async function pullOnInterval()
+{
+    while (true)
+    {
+        const inputModel = await pullAsync<InputModel>();
+        if (inputModel)
+            applyInputModel(inputModel);
+        await sleep(2000);
+    }
+}
+
 setTimeout(updateOnInterval);
+
+if (hasQueryParamSwitch("push"))
+    setTimeout(pushOnInterval);
+if (hasQueryParamSwitch("pull"))
+    setTimeout(pullOnInterval);
+
 disableReturnKeyBehaviorForTextInput();
+
+type InputModel = ReturnType<typeof getInputModel>;
+
+function getInputModel()
+{
+    return {
+        totalDonationsInputValue: totalDonationsInputElement.value,
+        donorMessagesTextAreaValue: donorMessagesTextAreaElement.value,
+        currentArtistInputValue: currentArtistInputElement.value,
+        currentTitleInputValue: currentTitleInputElement.value
+    }
+}
+
+function applyInputModel(x: InputModel)
+{
+    totalDonationsInputElement.value = x.totalDonationsInputValue;
+    donorMessagesTextAreaElement.value = x.donorMessagesTextAreaValue;
+    currentArtistInputElement.value = x.currentArtistInputValue;
+    currentTitleInputElement.value = x.currentTitleInputValue;
+}
 
 totalDonationsInputElement.value = "$1,000.00";
 donorMessagesTextAreaElement.value = `Hubol P.: I love Public Space One!
