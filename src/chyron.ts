@@ -15,6 +15,7 @@ import {getTickerMessageFromArtistTitle} from "./getTickerMessageFromArtistTitle
 import {insertAtLeastOneOrEveryN} from "./utils/insertAtLeastOneOrEveryN";
 import {pullAsync, pushAsync} from "./parrot";
 import {hasQueryParamSwitch} from "./utils/hasQueryParamSwitch";
+import {localStorageEntry} from "./utils/localStorageEntry";
 
 const width = 1920;
 const height = 256;
@@ -42,8 +43,6 @@ ticker.y = 80;
 
 donorMessagesContainer.addChild(ticker);
 
-let previousTickerMessageSource: TickerMessageSource | undefined = undefined;
-
 const state = {
     set totalDonationText(value: string)
     {
@@ -51,16 +50,12 @@ const state = {
     },
     set tickerMessages(tickerMessageSource: TickerMessageSource)
     {
-        if (equal(tickerMessageSource, previousTickerMessageSource))
-            return;
-
         const tickerMessagesFromDonorsInputValue = getTickerMessagesFromDonorsInputValue(tickerMessageSource.donorMessagesTextAreaValue);
         const tickerMessageFromArtistTitle =
             getTickerMessageFromArtistTitle(tickerMessageSource.currentArtistInputValue, tickerMessageSource.currentTitleInputValue);
         if (tickerMessageFromArtistTitle)
             insertAtLeastOneOrEveryN(tickerMessagesFromDonorsInputValue, tickerMessageFromArtistTitle, 3);
         ticker.messages = tickerMessagesFromDonorsInputValue;
-        previousTickerMessageSource = tickerMessageSource;
     }
 };
 
@@ -94,11 +89,21 @@ function getTickerMessagesSource()
     };
 }
 
+const storage = localStorageEntry<InputModel>("inputModel");
+
 async function updateOnInterval()
 {
+    let lastInputModel: InputModel | undefined = undefined;
+
     while (true)
     {
-        updateChyron();
+        const inputModel = getInputModel();
+        if (!equal(lastInputModel, inputModel))
+        {
+            updateChyron();
+            storage.write(inputModel);
+            lastInputModel = inputModel;
+        }
         await sleep(100);
     }
 }
@@ -130,6 +135,7 @@ async function pullOnInterval()
     }
 }
 
+applyInputModel(getStoredInputModel());
 setTimeout(updateOnInterval);
 
 if (hasQueryParamSwitch("push"))
@@ -159,11 +165,16 @@ function applyInputModel(x: InputModel)
     currentTitleInputElement.value = x.currentTitleInputValue;
 }
 
-totalDonationsInputElement.value = "$1,000.00";
-donorMessagesTextAreaElement.value = `Hubol P.: I love Public Space One!
+function getStoredInputModel(): InputModel
+{
+    return storage.read() || {
+        currentTitleInputValue: "Shrink that A",
+        currentArtistInputValue: "Good Evening Gumm",
+        donorMessagesTextAreaValue: `Hubol P.: I love Public Space One!
 Hubol Jr.: I also love Public Space One!
 John E.:Many people say I love Public Space One
 Kalmia S.:I love that Public Space One
-asdf:Aaaaaaaaaaaaaaaah!!!`;
-currentArtistInputElement.value = "Good Evening Gumm";
-currentTitleInputElement.value = "Shrink that A";
+asdf:Aaaaaaaaaaaaaaaah!!!`,
+        totalDonationsInputValue: "$1,000.00"
+    };
+}
